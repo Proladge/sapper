@@ -1,25 +1,21 @@
 .wrapper {
     display: grid;
-    /* grid-template-columns: 200px 200px 200px; */
-    grid-template-columns: repeat(8, 1fr);
-    /* justify-items: center; */
-    /* align-items: center; */
-}
-
-.grid-father {
-    width: 500px;
-    height: 500px;
+    grid-template-columns: repeat(8, 60px);
 }
 
 .point {
     border: solid gray 3px;
     text-align: center;
-    /* vertical-align: middle; */
-    /* transform: translate(-50%, -50%); */
+    height: 60px;
+    line-height: 50px;
     background: darkblue;
     box-sizing: border-box;
 }
-.opened {
+
+.point:hover {
+    opacity: 0.7;
+}
+.point.opened {
     background: yellowgreen;
 }
 
@@ -29,6 +25,10 @@
 
 p {
     display: none;
+}
+
+.point.flag {
+    background-color: red; 
 }
 
 .timer {
