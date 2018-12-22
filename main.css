@@ -1,0 +1,38 @@
+.wrapper {
+    display: grid;
+    /* grid-template-columns: 200px 200px 200px; */
+    grid-template-columns: repeat(8, 1fr);
+    /* justify-items: center; */
+    /* align-items: center; */
+}
+
+.grid-father {
+    width: 500px;
+    height: 500px;
+}
+
+.point {
+    border: solid gray 3px;
+    text-align: center;
+    /* vertical-align: middle; */
+    /* transform: translate(-50%, -50%); */
+    background: darkblue;
+    box-sizing: border-box;
+}
+.opened {
+    background: yellowgreen;
+}
+
+.opened p {
+    display: inline;
+}
+
+p {
+    display: none;
+}
+
+.timer {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
