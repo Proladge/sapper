@@ -33,8 +33,8 @@ class Field {
 
     Win() {
         const result = this.Timer.GetTimeElapsed();
-        const detail = {result};
-        const event = new CustomEvent("Win", { detail });
+        this.Timer.Stop();
+        const event = new CustomEvent("Win", { detail : {result} });
         document.dispatchEvent(event);
     }
 

@@ -31,7 +31,12 @@ class Timer {
     Start() {
         this.StartTime = Date.now();
         this.isStarted = true;
-        setInterval(this.updateValue.bind(this), "1000");
+        this.timerRunner = setInterval(this.updateValue.bind(this), "1000");
+    }
+
+    Stop() {
+        this.isStarted = false;
+        clearInterval(this.timerRunner);
     }
 
     updateValue() {

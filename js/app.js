@@ -30,7 +30,7 @@ class App {
 
     onWin(e){
         const result = e.detail && e.detail.result;
-        alert(`YOU WIN!!! \n Result: ${result ? result : ""}` );
+        alert(`YOU WIN!!! \n Result: ${result ? result : ""}`);
     }
 
     reload() {
