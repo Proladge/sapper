@@ -49,6 +49,10 @@ class Timer {
     }
 
     getTimeElapsed() {
-        return this.millisToMinutesAndSeconds(Date.now() - this.StartTime);
+        const ms = Date.now() - this.StartTime;
+        return  { 
+            result: this.millisToMinutesAndSeconds(ms),
+            mseconds:  ms
+        };
     }
 }

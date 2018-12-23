@@ -6,6 +6,7 @@ const DEFAULT_MODE = {
 class App {
     constructor() {
         this.Start = this.Start;
+        this.Storage = new Storage();
     }
 
     set Mode(value) {
@@ -48,9 +49,10 @@ class App {
 
     onWin(e){
         const result = e.detail && e.detail.result;
-        alert(`YOU WIN!!! \n Result: ${result ? result : ""}`);
+        alert(`YOU WIN!!! \n Result: ${result ? result.result : ""}`);
         const defNickName = this.CURRENT_USER && this.CURRENT_USER.NickName;
         const nickName = prompt("Enter Your nickName", defNickName || "");
+        this.Storage.SaveResult(nickName, result);
     }
 
     changeMode(mode) {
