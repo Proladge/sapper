@@ -1,15 +1,33 @@
+const DEFAULT_MODE = {
+    fieldWidth: 8,
+    fieldHeight: 8
+}
+
 class App {
     constructor() {
         this.Start = this.Start;
     }
 
+    set Mode(value) {
+        this._mode = value;
+        this.reloadField();
+    }
+
+    get Mode() {
+        return this._mode;
+    }
+
     Start() {
-        const fieldGenrator = new FieldGenrator();
-        const Field = fieldGenrator.generate();
-        const timerEl = Field.Timer && Field.Timer.el;
+        this._loadField();
+        this.subscribe();
+    }
+
+    _loadField() {
+        this._fieldGenrator = this._fieldGenrator || new FieldGenrator();
+        this.Field = this._fieldGenrator.generate(this.Mode || DEFAULT_MODE);
+        const timerEl = this.Field.Timer && this.Field.Timer.el;
         const saperEl = document.getElementById("saper");
         saperEl.appendChild(timerEl);
-        this.subscribe();
     }
 
     subscribe() {
@@ -31,6 +49,18 @@ class App {
     onWin(e){
         const result = e.detail && e.detail.result;
         alert(`YOU WIN!!! \n Result: ${result ? result : ""}`);
+        const defNickName = this.CURRENT_USER && this.CURRENT_USER.NickName;
+        const nickName = prompt("Enter Your nickName", defNickName || "");
+    }
+
+    changeMode(mode) {
+        this.Mode = mode;
+    }
+
+    reloadField() {
+        this.Field.Clear();
+        delete this.Field;
+        this._loadField();
     }
 
     reload() {

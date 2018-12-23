@@ -5,14 +5,21 @@ class Field {
         this.Height = height;
         this.Width = width;
         this.BombsAmount = bombsAmount;
+        this.fieldEl = document.getElementById("field");
         this.Timer = new Timer(timeMs);
         this.OpenedPointsCounter = 0;
         this.defPredicate = () => true;
+        this.Clear = this.clear;
         this.subscribe();
     }
 
     subscribe() {
-        document.addEventListener("Open", this.onPointOpened.bind(this), true);
+        this.onPointOpenedBinded = this.onPointOpened.bind(this);
+        document.addEventListener("Open", this.onPointOpenedBinded, true);
+    }
+
+    unSubscribe(){
+        document.removeEventListener("Open", this.onPointOpenedBinded, true);
     }
 
     onPointOpened(e) {
@@ -71,5 +78,16 @@ class Field {
             }
         }
         return points;
+    }
+
+    clear() {
+        this.unSubscribe();
+        const fieldEl = this.fieldEl;
+        if(!fieldEl) {
+            return;
+        }
+        while (fieldEl.firstChild) {
+            fieldEl.removeChild(fieldEl.firstChild);
+        }
     }
 }

@@ -5,10 +5,13 @@
 </head>
 <body>
     <saper id="saper">
-        <div>
             <h1>Saper App</h1>
         </div>
-        <div>
+        <div class="mode-list">
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 4, fieldHeight: 4})">4X4</a>
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 8, fieldHeight: 8})">8X8</a>
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 16, fieldHeight: 16})">16X16</a>
+        </div>
             <div id="field" class="wrapper grid-father">
               </div>
         </div>
@@ -23,8 +26,6 @@
 <script src="js/app.js"></script>
 
 <script >
-const FIELD_WIDTH = 8;
-const FIELD_HEIGHT = 8;
 const app = new App();
 app.Start();
 function getRandomArbitrary(min, max) {
