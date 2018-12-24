@@ -4,9 +4,10 @@ const DEFAULT_MODE = {
 }
 
 class App {
-    constructor() {
+    constructor(storage) {
         this.Start = this.Start;
-        this.Storage = new Storage();
+        this.Storage = storage;
+        this.Rating = new Rating(storage);
     }
 
     set Mode(value) {
@@ -21,6 +22,12 @@ class App {
     Start() {
         this._loadField();
         this.subscribe();
+    }
+
+    OpenRating() {
+        const ratingEl = this.Rating && this.Rating.el;
+        const rating = document.getElementById("rating");
+        rating.appendChild(ratingEl);
     }
 
     _loadField() {

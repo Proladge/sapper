@@ -33,7 +33,25 @@ class Storage {
     }
 
     getTopScores(amount) {
+        return this.getAllResults().then(resultsSnapShot => {
+            const results = resultsSnapShot.val();
+            let resultArray = [];
+            for(var user in results) {
+                var userResults = results[user];
+                for(var res in userResults) {
+                    resultArray.push({ user, ...userResults[res] });
+                }
+            }
+            console.log(results);
+            debugger;
+            return resultArray.sort((r1, r2) => r1.mseconds - r2.mseconds);
+        });
 
+    }
+
+    getAllResults() {
+        const resultsRef = firebase.database().ref("results");
+        return resultsRef.once("value");
     }
 
     getLastGames(amount) {
@@ -69,22 +87,4 @@ class Storage {
        return fetch('https://ipfind.co/me?auth=50e887ce-e3bb-4f00-a9b9-667597db5539')
             .then(res => res.json());
     }
-}
-
-
-var a = {
-    as: "AS25500 Association of users of Ukrainian Research & Academic Network ",
-city: "Kiev",
-country: "Ukraine",
-countryCode: "UA",
-isp: "NTUU-KPI 237",
-lat: 50.4501,
-lon: 30.5234,
-org: "National Technical University of Ukraine",
-query: "77.47.237.11",
-region: "30",
-regionName: "Kyiv City",
-status: "success",
-timezone: "Europe/Kiev",
-zip: ""
 }
