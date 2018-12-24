@@ -6,6 +6,7 @@ const config = {
     storageBucket: "saper-564b8.appspot.com",
     messagingSenderId: "1004050185007"
   };
+  
 class Storage {
     constructor() {
         firebase.initializeApp(config);
@@ -23,12 +24,8 @@ class Storage {
     getUserInfo(userName) {
         this.db.ref("users/" + userName).once("value")
             .then(function(snapshot) {
-                var name = snapshot.child("name").val(); // {first:"Ada",last:"Lovelace"}
-
+                var name = snapshot.child("name").val();
                 console.log(snapshot);
-                // var firstName = snapshot.child("name/first").val(); // "Ada"
-                // var lastName = snapshot.child("name").child("last").val(); // "Lovelace"
-                // var age = snapshot.child("age").val(); // null
             });
     }
 
@@ -43,7 +40,6 @@ class Storage {
                 }
             }
             console.log(results);
-            debugger;
             return resultArray.sort((r1, r2) => r1.mseconds - r2.mseconds);
         });
 
@@ -63,18 +59,14 @@ class Storage {
     }
 
     addUser(userName, ip, location, result) {
-        debugger;
         const usersRef = firebase.database().ref("users/" + userName);
-        const resultsRef = firebase.database().ref("results/" + userName);
         usersRef.once("value")
         .then(function(snapshot) {
             const record = {ip, location, date: Date.now()}
             if(!snapshot.exists()) {
                 usersRef.set(record);
             }
-            let resultsRef =  snapshot.child("results");
             var newResultRef = firebase.database().ref("results/" + userName).push();
-            // var newResultRef = resultsRef.push();
             newResultRef.set(result);
         });
     }
