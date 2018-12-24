@@ -29,25 +29,20 @@ class Storage {
             });
     }
 
-    getTopScores(amount) {
-        return this.getAllResults().then(resultsSnapShot => {
-            const results = resultsSnapShot.val();
-            let resultArray = [];
-            for(var user in results) {
-                var userResults = results[user];
-                for(var res in userResults) {
-                    resultArray.push({ user, ...userResults[res] });
-                }
-            }
-            console.log(results);
-            return resultArray.sort((r1, r2) => r1.mseconds - r2.mseconds);
+    getTopScores(amount, mode) {
+        return this.getAllResultsByMode(mode).then(resultsSnapShot => {
+            
+            console.log(resultsSnapShot);
+            return resultsSnapShot.val();
         });
-
     }
 
-    getAllResults() {
-        const resultsRef = firebase.database().ref("results");
-        return resultsRef.once("value");
+    getAllResultsRef() {
+        return firebase.database().ref("results");
+    }
+
+    getAllResultsByMode(mode) {
+        return this.getAllResultsRef().orderByChild("mode").equalTo(mode).once("value");
     }
 
     getLastGames(amount) {
@@ -66,7 +61,8 @@ class Storage {
             if(!snapshot.exists()) {
                 usersRef.set(record);
             }
-            var newResultRef = firebase.database().ref("results/" + userName).push();
+            var newResultRef = firebase.database().ref("results").push();
+            result.user = userName;
             newResultRef.set(result);
         });
     }

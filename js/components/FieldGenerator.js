@@ -81,13 +81,11 @@ class FieldGenrator {
     }
 
   _generateBombedPointsArray(maxX, maxY, bombsAmount) {
-        // return [{"x":1,"y":0},{"x":2,"y":5},{"x":2,"y":1},{"x":2,"y":2},{"x":5,"y":3},{"x":4,"y":2},{"x":1,"y":4},{"x":7,"y":5},{"x":5,"y":6},{"x":0,"y":8},{"x":1,"y":6},{"x":6,"y":2},{"x":7,"y":4},{"x":7,"y":1},{"x":7,"y":6}];
-        // return [{"x":6,"y":8},{"x":8,"y":2},{"x":3,"y":0},{"x":1,"y":8},{"x":0,"y":2},{"x":3,"y":3},{"x":3,"y":6},{"x":0,"y":8},{"x":3,"y":3},{"x":3,"y":6},{"x":7,"y":4},{"x":7,"y":6},{"x":7,"y":4},{"x":7,"y":7},{"x":1,"y":0}];
         let bombedPoints = [];
         for (let i=0; i < bombsAmount; i++){ 
             do {
-                var x = getRandomInt(1, maxX);
-                var y = getRandomInt(1, maxY);
+                var x = this._getRandomInt(1, maxX);
+                var y = this._getRandomInt(1, maxY);
                 if(!bombedPoints.some(p => p.x === x && p.y === y)) {
                     bombedPoints.push({x, y});
                 }
@@ -95,6 +93,12 @@ class FieldGenrator {
 
         }
         return bombedPoints;
+    }
+
+    _getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     _getBombsAmmount() {

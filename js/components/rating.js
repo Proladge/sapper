@@ -1,16 +1,24 @@
 class Rating {
-    constructor(storage) {
+    constructor(storage, mode, onRender) {
         this.Storage = storage;
-        this.initEl();
+        this.Mode = mode;
+        this.Clear = this.clear;
+        this.initEl(onRender);
     }
     
-    initEl() {
-        this.Storage.getTopScores(10)
+    initEl(callback) {
+        this.Storage.getTopScores(10, this.Mode.Id)
             .then( ratingList => {
                 this.ratingList = ratingList;
                 this.el = this._generateDomEl();
+                callback();
             });
-        }
+    }
+
+    clear() {
+        const el = this.el;
+        el && el.remove();
+    }
 
     _generateDomEl() {
         let table =  document.createElement("table");
@@ -37,6 +45,7 @@ class Rating {
     }
 
     prepareCellsArray(ratingItem) {
-        return [ratingItem.user, ratingItem.result, new Date(ratingItem.date).toGMTString()];
+        const date = new Date(ratingItem.date);
+        return [ratingItem.user, ratingItem.result, date.toDateString() + date.toLocaleTimeString()];
     }
 }
