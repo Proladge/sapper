@@ -1,8 +1,24 @@
-const DEFAULT_MODE = {
-    fieldWidth: 8,
-    fieldHeight: 8,
-    Id: 8
-}
+const MODES = {
+    "4": {
+        fieldWidth: 4,
+        fieldHeight: 4,
+        fieldClassName: "four-x-four", 
+        Id: 4
+    },
+    "8": {
+        fieldWidth: 8,
+        fieldHeight: 8,
+        fieldClassName: "eight-x-eight", 
+        Id: 8
+    },
+    "16": {
+        fieldWidth: 16,
+        fieldHeight: 16,
+        fieldClassName: "sixteen-x-sixteen", 
+        Id: 16
+    }
+};
+const DEFAULT_MODE = MODES["8"];
 
 class App {
     constructor(storage) {
@@ -73,8 +89,8 @@ class App {
         this.Storage.SaveResult(nickName, result);
     }
 
-    changeMode(mode) {
-        this.Mode = mode;
+    changeMode(modeId) {
+        this.Mode = MODES && MODES[modeId];
     }
 
     reloadField() {

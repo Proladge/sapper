@@ -1,16 +1,41 @@
+const defPredicate = () => true;
+
 class Field {
 
-    constructor(points, bombsAmount, height, width, timeMs) {
+    constructor(points, bombsAmount, height, width, className, timeMs) {
         this.Points = points;
         this.Height = height;
         this.Width = width;
+        this.className = className;
         this.BombsAmount = bombsAmount;
-        this.fieldEl = document.getElementById("field");
+        this.parentEl = document.getElementById("field");
         this.Timer = new Timer(timeMs);
         this.OpenedPointsCounter = 0;
-        this.defPredicate = () => true;
         this.Clear = this.clear;
+        this.init();
+    }
+    
+    init() {
+        if(this.FieldEl) {
+            this.clear();
+        }
+        this.FieldEl = document.createElement("field");
+        this.FieldEl.classList.add(this.className);
+        this.parentEl.appendChild(this.FieldEl);
+        this._visualize(this.FieldEl, this.Points);
         this.subscribe();
+    }
+
+    _visualize(fieldEl, points) {
+        if(!points || !Array.isArray(points)) {
+            return;
+        }
+        points.forEach(pointsRow => {
+            if(!pointsRow || !Array.isArray(pointsRow)) {
+                return;
+            }
+            pointsRow.forEach(p => fieldEl.appendChild(p.el));
+        });
     }
 
     subscribe() {
@@ -82,12 +107,6 @@ class Field {
 
     clear() {
         this.unSubscribe();
-        const fieldEl = this.fieldEl;
-        if(!fieldEl) {
-            return;
-        }
-        while (fieldEl.firstChild) {
-            fieldEl.removeChild(fieldEl.firstChild);
-        }
+        this.FieldEl && this.FieldEl.remove();
     }
 }

@@ -33,15 +33,50 @@ h1 {
   font-size: 1.25em;
 }
 
-.wrapper {
+sapper {
+    display: flex;    
+}
+
+/* sapper h1 {
+    width: 100%;
+    flex-shrink: 0;
+} */
+
+field {
     display: grid;
-    /* grid-template-columns: repeat(8, 60px); */
+}
+
+field.four-x-four {
+    grid-template-columns: repeat(4, 4em);
+}
+
+field.eight-x-eight {
+    grid-template-columns: repeat(8, 3em);
+}
+
+field.sixteen-x-sixteen {
+    grid-template-columns: repeat(16, 2em);
+}
+
+.four-x-four .point{
+    height: 4em;
+    line-height: 3.8em;
+}
+
+.eight-x-eight .point {
+    height: 3em;
+    line-height: 2.5em; 
+}
+
+.sixteen-x-sixteen .point {
+    height: 2em;
+    line-height: 1.6em; 
 }
 
 .point {
     border: solid gray 3px;
     text-align: center;
-    height: 60px;
+    height: 3em;
     line-height: 50px;
     background: darkblue;
     box-sizing: border-box;

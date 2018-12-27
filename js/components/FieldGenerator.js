@@ -5,13 +5,11 @@ class FieldGenrator {
         this.fieldEl = document.getElementById("field");
     }
     
-    _generate({ fieldWidth, fieldHeight }) {
+    _generate({ fieldWidth, fieldHeight, fieldClassName }) {
         const bombsAmount = this._getBombsAmmount();
         let bombedPoints = this._generateBombedPointsArray(fieldWidth, fieldHeight, bombsAmount);
         const points = this._generatePoints(fieldWidth, fieldHeight, bombedPoints);
-        this._visualizePoints(points);
-        this._adjustField(fieldWidth);
-        return new Field(points, bombsAmount, fieldWidth, fieldWidth, 50000);
+        return new Field(points, bombsAmount, fieldWidth, fieldWidth, fieldClassName, 50000);
     }
 
 
@@ -62,22 +60,6 @@ class FieldGenrator {
                 }
             });
         });
-    }
-
-   _visualizePoints(points) {
-        if(!points || !Array.isArray(points)) {
-            return;
-        }
-        points.forEach(pointsRow => {
-            if(!pointsRow || !Array.isArray(pointsRow)) {
-                return;
-            }
-            pointsRow.forEach(p => this.fieldEl.appendChild(p.el));
-        });
-    }
-
-    _adjustField(itemsInRow){
-        this.fieldEl.style.gridTemplateColumns = `repeat(${itemsInRow}, 60px)`;
     }
 
   _generateBombedPointsArray(maxX, maxY, bombsAmount) {
