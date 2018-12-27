@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sapper</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+    <sapper id="sapper">
+            <h1>sapper App</h1>
+        </div>
+        <div class="mode-list">
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 4, fieldHeight: 4, Id: 4})">4X4</a>
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 8, fieldHeight: 8, Id: 8})">8X8</a>
+            <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 16, fieldHeight: 16, Id:16})">16X16</a>
+        </div>
+            <div id="field" class="wrapper grid-father">
+              </div>
+              <div id="rating" class="rating-list">
+
+              </div>
+        </div>
+    </sapper>
+</body>
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+<script src="js\components\Point.js" ></script>
+<script src="js/components/Bomb.js" ></script>
+<script src="js/components/Timer.js" ></script>
+<script src="js/components/Field.js" ></script>
+<script src="js/components/FieldGenerator.js" ></script>
+<script src="js/components/rating.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+
+<script >
+const MODES = {
+    "4X4": 4,
+    "8X8": 8,
+    "16X16": 16
+}
+const storage = new Storage();
+const app = new App(storage);
+app.Start();
+app.OpenRating();
+</script>
