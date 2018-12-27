@@ -44,8 +44,8 @@ class App {
         this._fieldGenrator = this._fieldGenrator || new FieldGenrator();
         this.Field = this._fieldGenrator.generate(this.Mode);
         const timerEl = this.Field.Timer && this.Field.Timer.el;
-        const saperEl = document.getElementById("saper");
-        saperEl.appendChild(timerEl);
+        const sapperEl = document.getElementById("sapper");
+        sapperEl.appendChild(timerEl);
     }
 
     subscribe() {
