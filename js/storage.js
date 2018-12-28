@@ -25,14 +25,11 @@ class Storage {
         this.db.ref("users/" + userName).once("value")
             .then(function(snapshot) {
                 var name = snapshot.child("name").val();
-                console.log(snapshot);
             });
     }
 
     getTopScores(amount, mode) {
         return this.getAllResultsByMode(mode).then(resultsSnapShot => {
-            
-            console.log(resultsSnapShot);
             return resultsSnapShot.val();
         });
     }
