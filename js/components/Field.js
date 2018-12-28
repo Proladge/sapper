@@ -57,7 +57,7 @@ class Field {
         const point = e.detail &&  e.detail.point;
         let nearByPoints = [];
         if(point) {
-            nearByPoints = this.getNearByPointsArray(point, p=> p && p.NumberOfBombsArroud === 0);
+            nearByPoints = this.getNearByPointsArray(point, p=> p && !p.isOpened && p.NumberOfBombsArroud === 0);
         }
         nearByPoints.forEach(p => p.Open());
         // this.openNearByPoints(point);

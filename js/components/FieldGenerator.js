@@ -5,11 +5,10 @@ class FieldGenrator {
         this.fieldEl = document.getElementById("field");
     }
     
-    _generate({ fieldWidth, fieldHeight, fieldClassName }) {
-        const bombsAmount = this._getBombsAmmount();
+    _generate({ fieldWidth, fieldHeight, fieldClassName, bombsAmount, time }) {
         let bombedPoints = this._generateBombedPointsArray(fieldWidth, fieldHeight, bombsAmount);
         const points = this._generatePoints(fieldWidth, fieldHeight, bombedPoints);
-        return new Field(points, bombsAmount, fieldWidth, fieldWidth, fieldClassName, 50000);
+        return new Field(points, bombsAmount, fieldWidth, fieldWidth, fieldClassName, time);
     }
 
 
@@ -64,15 +63,17 @@ class FieldGenrator {
 
   _generateBombedPointsArray(maxX, maxY, bombsAmount) {
         let bombedPoints = [];
+        let pointAdded = false;
         for (let i=0; i < bombsAmount; i++){ 
             do {
                 var x = this._getRandomInt(1, maxX);
                 var y = this._getRandomInt(1, maxY);
                 if(!bombedPoints.some(p => p.x === x && p.y === y)) {
                     bombedPoints.push({x, y});
-                }
-            } while (!bombedPoints.some(p => p.x === x && p.y === y));
-
+                    pointAdded = true;
+                } 
+            } while (!pointAdded);
+            pointAdded = false;
         }
         return bombedPoints;
     }
@@ -82,8 +83,5 @@ class FieldGenrator {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-
-    _getBombsAmmount() {
-        return 5;
-    }
+    
 }

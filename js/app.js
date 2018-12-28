@@ -1,21 +1,27 @@
 const MODES = {
     "4": {
+        Id: 4,
         fieldWidth: 4,
         fieldHeight: 4,
-        fieldClassName: "four-x-four", 
-        Id: 4
+        fieldClassName: "four-x-four",
+        bombsAmount: 5,
+        time: 30000
     },
     "8": {
+        Id: 8,
         fieldWidth: 8,
         fieldHeight: 8,
-        fieldClassName: "eight-x-eight", 
-        Id: 8
+        fieldClassName: "eight-x-eight",
+        bombsAmount: 10,
+        time: 60000
     },
     "16": {
+        Id: 16,
         fieldWidth: 16,
         fieldHeight: 16,
-        fieldClassName: "sixteen-x-sixteen", 
-        Id: 16
+        bombsAmount: 40,
+        fieldClassName: "sixteen-x-sixteen",
+        time: 240000
     }
 };
 const DEFAULT_MODE = MODES["8"];
@@ -109,7 +115,4 @@ class App {
         location.reload();
     }
 
-    saveResult() {
-
-    }
 }
