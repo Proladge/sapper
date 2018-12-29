@@ -5,7 +5,7 @@ const config = {
     projectId: "saper-564b8",
     storageBucket: "saper-564b8.appspot.com",
     messagingSenderId: "1004050185007"
-  };
+};
   
 class Storage {
     constructor() {

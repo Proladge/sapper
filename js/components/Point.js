@@ -45,15 +45,16 @@ class Point {
 
     Subscribe() {
         this.el.addEventListener("click", this.Open.bind(this));
+        this.el.addEventListener("onmousedown", this.onMouseDown.bind(this));
+        this.el.addEventListener("onmouseup", this.onMouseUp.bind(this));
         this.el.addEventListener("contextmenu", this.Flag.bind(this));
-        // this.el.addEventListener("Open", this.onPointOpened.bind(this), true);
     }
 
     generateId(x, y) {
         return x + "_" + y;
     }
 
-    Open() {
+    Open(e) {
         if(this._isOpened || this._isFlaged) {
             return;
         }
@@ -63,6 +64,15 @@ class Point {
         document.dispatchEvent(event);
     }
 
+    onMouseDown(e) {
+        console.log("onMouseDown", e);
+    }
+
+    onMouseUp(e) {
+        console.log("onMouseDown", e);
+    }
+
+
     Flag(e) {
         if(e.which === 3) {
             e.preventDefault();
@@ -71,12 +81,6 @@ class Point {
             }
             this._isFlaged = !this._isFlaged;
             this._isFlaged ? this.el.classList.add("flag") : this.el.classList.remove("flag");
-        }
-    }
-
-    onPointOpened(point) {
-        if(!this._isOpened && this.isNearByPoint(this)) {
-            this.Open();
         }
     }
 
