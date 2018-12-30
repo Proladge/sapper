@@ -55,9 +55,13 @@ class Field {
             this.Win();
         console.log("OpenedPointsCounter", this.OpenedPointsCounter);
         const point = e.detail &&  e.detail.point;
+        if(point.NumberOfBombsArroud !== 0) {
+            return;
+            // nearByPoints = nearByPoints.filter(p => p.NumberOfBombsArroud === 0);
+        }
         let nearByPoints = [];
         if(point) {
-            nearByPoints = this.getNearByPointsArray(point, p=> p && !p.isOpened && p.NumberOfBombsArroud === 0);
+            nearByPoints = this.getNearByPointsArray(point, p=> p && !p.isOpened);
         }
         nearByPoints.forEach(p => p.Open());
         // this.openNearByPoints(point);
