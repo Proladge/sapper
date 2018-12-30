@@ -45,9 +45,9 @@ class Point {
 
     Subscribe() {
         this.el.addEventListener("click", this.Open.bind(this));
-        this.el.addEventListener("onmousedown", this.onMouseDown.bind(this));
-        this.el.addEventListener("onmouseup", this.onMouseUp.bind(this));
-        this.el.addEventListener("contextmenu", this.Flag.bind(this));
+        this.el.addEventListener("mousedown", this.onMouseDown.bind(this));
+        this.el.addEventListener("mouseup", this.onMouseUp.bind(this));
+        this.el.addEventListener("contextmenu", this.onRightButtonClicked.bind(this));
     }
 
     generateId(x, y) {
@@ -65,23 +65,35 @@ class Point {
     }
 
     onMouseDown(e) {
+        this.clickTime = 1000;
+        this.clickWaiter = setInterval(() => {
+            this.clickTime -= 100;
+            if(this.clickTime < 0) {
+                this.Flag();
+                clearInterval(this.clickWaiter);
+            }
+        }, 100);
         console.log("onMouseDown", e);
     }
 
     onMouseUp(e) {
-        console.log("onMouseDown", e);
+        clearInterval(this.clickWaiter);
+        console.log("onMouseUp", e);
     }
 
-
-    Flag(e) {
+    onRightButtonClicked(e) {
         if(e.which === 3) {
             e.preventDefault();
-            if(this._isOpened) {
-                return;
-            }
-            this._isFlaged = !this._isFlaged;
-            this._isFlaged ? this.el.classList.add("flag") : this.el.classList.remove("flag");
+            this.Flag();
         }
+    }
+
+    Flag() {
+        if(this._isOpened) {
+            return;
+        }
+        this._isFlaged = !this._isFlaged;
+        this._isFlaged ? this.el.classList.add("flag") : this.el.classList.remove("flag");
     }
 
     isNearByPoint(point) {

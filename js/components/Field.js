@@ -112,5 +112,6 @@ class Field {
     clear() {
         this.unSubscribe();
         this.FieldEl && this.FieldEl.remove();
+        this.Timer.Remove();
     }
 }

@@ -4,13 +4,13 @@ class Timer {
         this.ms = ms;
         this.GetTimeElapsed = this.getTimeElapsed;
         this.el = this.generateEl("timer", "timer");
+        this.Remove = this.remove;
     }
 
     generateEl(id, className) {
         let el = document.createElement("div");
         el.className = className;
         el.setAttribute("id", id);
-        // el.innerHTML = id;
         return el;
     }
 
@@ -54,5 +54,10 @@ class Timer {
             result: this.millisToMinutesAndSeconds(ms),
             mseconds:  ms
         };
+    }
+
+    remove() {
+        this.isStarted && this.Stop();
+        this.el && this.el.remove();
     }
 }
