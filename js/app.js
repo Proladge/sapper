@@ -70,7 +70,10 @@ class App {
         alert(`YOU WIN!!! \n Result: ${result ? result.result : ""}`);
         const defNickName = this.CURRENT_USER && this.CURRENT_USER.NickName;
         const nickName = prompt("Enter Your nickName", defNickName || "");
-        this.Storage.SaveResult(nickName, result);
+        this.Storage.SaveResult(nickName, result)
+        .then(() => {
+            this.reloadRating()
+        });
     }
 
     changeMode(mode) {

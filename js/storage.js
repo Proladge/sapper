@@ -15,7 +15,7 @@ class Storage {
 
     SaveResult(name, result) {
         result.date = Date.now();
-        this.getIPInfo().then( ({ip_address, city, country, latitude, longitude }) => 
+        return this.getIPInfo().then( ({ip_address, city, country, latitude, longitude }) => 
                 this.addUser(name, ip_address , {city, country, latitude, longitude}, result)
             );
 
@@ -63,7 +63,7 @@ class Storage {
             }
             var newResultRef = firebase.database().ref("results").push();
             result.user = userName;
-            newResultRef.set(result);
+            return newResultRef.set(result);
         });
     }
 
