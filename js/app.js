@@ -99,6 +99,7 @@ class App {
     }
 
     changeMode(modeId) {
+        debugger;
         this.Mode = MODES && MODES[modeId];
     }
 
