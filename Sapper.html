@@ -4,20 +4,28 @@
     <title>sapper</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <sapper id="sapper">
-            <h1>Sapper</h1>
-        </div>
-        <div>
-            <div class="mode-list">
-                <a class="btn mode-btn green large" onclick="app.changeMode(4)">4X4</a>
-                <a class="btn mode-btn green large" onclick="app.changeMode(8)">8X8</a>
-                <a class="btn mode-btn green large" onclick="app.changeMode(16)">16X16</a>
+    <saper id="saper">
+            <h1>Saper App</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="mode-list">
+                        <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 4, fieldHeight: 4, Id: 4})">4X4</a>
+                        <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 8, fieldHeight: 8, Id: 8})">8X8</a>
+                        <a class="btn mode-btn green large" onclick="app.changeMode({fieldWidth: 16, fieldHeight: 16, Id:16})">16X16</a>
+                    </div>
+                    <div id="field" class="wrapper grid-father"></div>
+                </div>
+                <div class="col">
+                    <div id="rating" class="rating-list">
+                        <h3>Leaders board</h3>
+                    </div>
+                </div>
             </div>
-            <div id="field" class="wrapper grid-father"></div>
         </div>
-            <div id="rating" class="rating-list"></div>
         </div>
     </sapper>
 </body>

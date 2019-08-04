@@ -9,7 +9,11 @@ class Rating {
     initEl(callback) {
         this.Storage.getTopScores(10, this.Mode.Id)
             .then( ratingList => {
-                this.ratingList = ratingList;
+                let sortable = [];
+                for (let item in ratingList) {
+                    sortable.push(ratingList[item]);
+                }
+                this.ratingList = sortable.sort((a, b) => a.mseconds - b.mseconds);
                 this.el = this._generateDomEl();
                 callback();
             });
@@ -21,18 +25,32 @@ class Rating {
     }
 
     _generateDomEl() {
-        let table =  document.createElement("table");
-        table.innerHTML = this.getTableHeader();
+        let list = document.createElement("ul");
+        list.classList.add("list-group");
+        // table.innerHTML = this.getTableHeader();
         for(let item in this.ratingList) {
-            let row = table.insertRow();
-            row.classList.add("rating-item");
-            const cells = this.prepareCellsArray(this.ratingList[item]);
-            cells.forEach((c, index) => { 
-                let cell = row.insertCell();
-                cell.innerHTML = c;
-            });
+            // let row = table.insertRow();
+
+            let li  = document.createElement("li");
+            li.classList.add("rating-item");
+            li.classList.add("list-group-item");
+            li.classList.add("align-items-center");
+            li.classList.add("justify-content-between");
+            li.classList.add("d-flex");
+            
+            let liText = this.prepareLi(this.ratingList[item]);
+            li.innerHTML = liText;
+
+            let span = document.createElement("span");
+            span.classList.add("badge");
+            span.classList.add("badge-primary");
+            span.classList.add("badge-pill");
+
+            span.appendChild(document.createTextNode(this.prepareLiBage(this.ratingList[item])));
+            li.appendChild(span);
+            list.appendChild(li);
         }
-        return table;
+        return list;
     }
 
     getTableHeader() {
@@ -44,8 +62,13 @@ class Rating {
         </tr>`
     }
 
-    prepareCellsArray(ratingItem) {
+    prepareLi(ratingItem) {
         const date = new Date(ratingItem.date);
-        return [ratingItem.user, ratingItem.result, date.toDateString() + date.toLocaleTimeString()];
+        return `<b>${ratingItem.user}</b> ${ratingItem.result} ${date.toDateString() + date.toLocaleTimeString()}`;
     }
+
+    prepareLiBage(ratingItem) {
+        return `${ratingItem.result}`;
+    }
+    
 }
